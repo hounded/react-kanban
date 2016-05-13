@@ -41,7 +41,7 @@ body{
     transition: 0.6s;
 }
 
-.delete-note {
+.delete {
     float:right;
 
     padding: 0;
@@ -54,11 +54,11 @@ body{
     visibility: hidden;
 }
 
-.note:hover .delete-note {
+.note:hover .delete {
     visibility: visible;
 }
 
-.note .task {
+.note .value {
     display: inline-block;
 }
 

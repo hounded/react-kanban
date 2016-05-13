@@ -7,16 +7,21 @@ class NoteStore {
         this.bindActions(NoteActions);
 
         this.notes = [];
+
+        this.exportPublicMethods({
+            getNotesByIds: this.getNotesByIds.bind(this)
+        });
     }
 
     create(note){
         const notes = this.notes;
 
-        note.id = uuid.v4()
+        note.id = uuid.v4();
 
         this.setState({
             notes: notes.concat(note)
-        })
+        });
+        return note;
     }
     update(updatedNote){
 
@@ -25,7 +30,7 @@ class NoteStore {
                 return Object.assign({},note,updatedNote);
             }
             return note;
-        });d
+        });
 
         this.setState({notes});
     }
@@ -35,6 +40,15 @@ class NoteStore {
             notes: this.notes.filter(note=> note.id !== id)
         });
 
+    }
+
+    getNotesByIds(ids){
+
+        return(ids || []).reduce((notes, id)=>
+            notes.concat(
+                this.notes.filter(note=>note.id === id)
+            )
+        ,[]);
     }
 }
 
